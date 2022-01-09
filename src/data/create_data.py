@@ -19,7 +19,7 @@ def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn):
         if tweet_cnt < subset_size:
             for tweet in batch['data']:
                 # add filters for healthcare terms and youtube links 
-                if tweet_cnt < subset_size:
+                if check_link(tweet) && health_filter(tweet) && (tweet_cnt < subset_size):
                     tweet_cnt += 1
                     with jsonlines.open(tweets_fn, 'a') as writer:
                         writer.write(tweet)
