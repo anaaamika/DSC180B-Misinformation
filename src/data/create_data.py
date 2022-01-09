@@ -33,10 +33,19 @@ def check_link(tweet):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46'}
     try:
         if 'urls' in tweet['entities'].keys():
-            url = tweet['entities']['url']
+            url = tweet['entities']['urls']
             response = requests.get(url, headers=headers)
             if str(response.url).contains("youtube.com"):
                 return True
+    except KeyError:
+        pass
+    return False
+
+def health_filter(tweet, health_terms_fn):
+    keywords = pd.read_csv(health_terms_fn, names=['Term'])
+    try:
+        if keywords['Term'].str.contains(tweet['text'], regex=False).any():
+            return True
     except KeyError:
         pass
     return False
