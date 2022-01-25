@@ -20,7 +20,7 @@ def main(targets):
             data_cfg = json.load(fh)
 
         download_tweet_ids(**data_cfg["download_params"])
-        create_data(**data_cfg["hydrate_params"])
+        fetch_tweets(**data_cfg["hydrate_params"])
         
     if 'analysis' in targets:
         with open('config/analysis-params.json') as fh:
