@@ -2,6 +2,7 @@ from twarc.client2 import Twarc2
 from twarckeys import consumer_key, consumer_secret, access_token, access_token_secret
 from dask import dataframe as df1
 import jsonlines
+import requests
 
 t = Twarc2(consumer_key, consumer_secret, access_token, access_token_secret)
 subset_size = 200
@@ -16,15 +17,15 @@ def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn):
 
     tweet_cnt = 0
     for batch in hydrated_tweets:
-        if tweet_cnt < subset_size:
+        if tweet_cnt < int(subset_size):
             for tweet in batch['data']:
                 # add filters for healthcare terms and youtube links 
-                if check_link(tweet) && health_filter(tweet) && (tweet_cnt < subset_size):
+                if check_link(tweet) and health_filter(tweet) and (tweet_cnt < subset_size):
                     tweet_cnt += 1
                     with jsonlines.open(tweets_fn, 'a') as writer:
                         writer.write(tweet)
                     f = open(video_ids_fn, "a")
-                    f.write(get_video_id(tweet)
+                    f.write(get_video_id(tweet))
                     f.close()
                 else:
                     break
@@ -51,7 +52,9 @@ def get_video_id(tweet):
             url = tweet['entities']['urls']
             response = requests.get(url, headers=headers)
             if str(response.url).contains("youtube.com"):
-                return str(response.url).partition(“v”=)[2]
+                return str(response.url).partition("v=")[2]
+    except KeyError:
+        return 
 
 def health_filter(tweet, health_terms_fn):
     keywords = pd.read_csv(health_terms_fn, names=['Term'])
