@@ -38,10 +38,14 @@ def check_link(tweet):
     try:
         if 'urls' in tweet['entities'].keys():
             url = tweet['entities']['urls']
-            response = requests.get(url, headers=headers)
-       
-            if str(response.url).contains("youtube.com"):
-                return True
+            try:
+                response = requests.get(url, headers=headers)
+                if str(response.url).contains("youtube.com"):
+                    return True
+            except:
+                fn = open('bad_urls.csv', 'a') 
+                fn.write(str(url))
+                fn.close()
     except KeyError:
         pass
     return False
@@ -65,6 +69,3 @@ def health_filter(tweet, health_terms_fn):
     except KeyError:
         pass
     return False
-
-
-
