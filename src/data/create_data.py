@@ -39,6 +39,7 @@ def check_link(tweet):
         if 'urls' in tweet['entities'].keys():
             url = tweet['entities']['urls']
             response = requests.get(url, headers=headers)
+       
             if str(response.url).contains("youtube.com"):
                 return True
     except KeyError:
