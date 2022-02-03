@@ -69,6 +69,3 @@ def health_filter(tweet, health_terms_fn):
     except KeyError:
         pass
     return False
-
-
-
