@@ -8,7 +8,7 @@ sys.path.insert(0, 'src/data')
 sys.path.insert(0, 'src/analysis')
 sys.path.insert(0, 'test')
 
-from create_data import fetch_tweets
+from create_data import fetch_tweets, missingness
 from compile_tweet_ids import download_tweet_ids
 # import eda
 # import generate_data
@@ -21,6 +21,7 @@ def main(targets):
 
         download_tweet_ids(**data_cfg["download_params"])
         fetch_tweets(**data_cfg["hydrate_params"])
+        missingness(**data_cfg["missingness_params"])
         
     if 'analysis' in targets:
         with open('config/analysis-params.json') as fh:

@@ -1,3 +1,4 @@
 twarckeys.py
 /data
 *.pyc
+clinet_secrets.json
