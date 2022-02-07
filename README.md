@@ -1,1 +1,2 @@
-# DSC180B_Misinformation_Project
+# DSC180B Misinformation Project
+Project Website: https://anaaamika.github.io/DSC180B-Misinformation/
