@@ -1,6 +1,6 @@
 {
     "test_data_params": {
-        "num_tweets": "100",
+        "num_tweets": "1000",
         "tweets_fn": "test/testdata/test_tweets.jsonl",
-        "outfile": "test/testdata/test_tweets.jsonl"}
+        "outfolder": "test"}
 }
