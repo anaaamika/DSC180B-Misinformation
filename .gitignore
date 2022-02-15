@@ -1,6 +1,8 @@
-twarckeys.py
-/data
+/data/*
 *.pyc
-client_secrets.json
-*/client_secrets.json
-youtubekeys.py
+__pycache__/
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb
+!notebooks/*.ipynb
+/secrets/*
