@@ -1,3 +1,6 @@
+import sys 
+sys.path.insert(0, '../../secrets')
+
 from googleapiclient.discovery import build
 from youtubekeys import api_key
 

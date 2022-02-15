@@ -1,3 +1,6 @@
+import sys 
+sys.path.insert(0, '../../secrets')
+
 from twarc.client2 import Twarc2
 from twarckeys import consumer_key, consumer_secret, access_token, access_token_secret
 from dask import dataframe as df1

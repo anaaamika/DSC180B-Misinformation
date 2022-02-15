@@ -1,5 +1,10 @@
+import sys 
+sys.path.insert(0, '../../secrets')
+
+
 from googleapiclient.discovery import build
-s
+from youtubekeys import api_key
+
 
 # 
 def youtube_data(video_ids_fn, outfolder="data"):
@@ -47,6 +52,6 @@ def fetch_metadata(video_id):
     
     return data
 
-# if __name__ == '__main__':
-#     video_id = "CYy1ffLBcRg"
-#     fetch_metadata(video_id)
+if __name__ == '__main__':
+    video_id = "CYy1ffLBcRg"
+    fetch_metadata(video_id)
