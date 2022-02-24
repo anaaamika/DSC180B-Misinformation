@@ -1,3 +1,8 @@
-twarckeys.py
-/data
+/data/*
 *.pyc
+__pycache__/
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb
+!notebooks/*.ipynb
+/secrets/*

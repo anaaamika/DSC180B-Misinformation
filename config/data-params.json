@@ -6,10 +6,10 @@
     },
     
     "hydrate_params": {
-        "subset_size": "2000",
+        "subset_size": "100",
         "tweets_ids_fn": "data/tweet_ids_dataset.tsv", 
         "tweets_fn": "data/tweets.jsonl",
-        "video_ids_fn": "data/video_ids.jsonl"
+        "video_ids_fn": "data/video_ids.csv"
     },
     
     "missingness_params": {
