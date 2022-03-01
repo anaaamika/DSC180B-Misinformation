@@ -18,7 +18,7 @@ def caption_data(video_ids_fn, outfolder="data/"):
                 video_data = fetch_transcript(video_id, formatter)
             except:
                 video_data = [video_id, None, None, None, None]
-            with open(outfolder+"caption_text.csv", 'a') as f:
+            with open(outfolder+"caption_data.csv", 'a') as f:
                 writer = csv.writer(f)
                 writer.writerow(video_data)  
             

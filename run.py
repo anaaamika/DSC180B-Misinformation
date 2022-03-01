@@ -10,6 +10,10 @@ sys.path.insert(0, 'test')
 
 from create_data import fetch_tweets, missingness
 from compile_tweet_ids import download_tweet_ids
+from fetch_captions import caption_data
+from fetch_youtube_data import youtube_data
+from twitter_data import make_twitter_data
+from youtube_comments import comment_data
 # import eda
 import generate_data
 # import kcore
@@ -19,9 +23,14 @@ def main(targets):
         with open('config/data-params.json') as fh:
             data_cfg = json.load(fh)
 
-        download_tweet_ids(**data_cfg["download_params"])
-        fetch_tweets(**data_cfg["hydrate_params"])
-        missingness(**data_cfg["missingness_params"])
+#         download_tweet_ids(**data_cfg["download_params"])
+#         fetch_tweets(**data_cfg["hydrate_params"])
+#         missingness(**data_cfg["missingness_params"])
+        
+#         youtube_data(data_cfg["dataset_params"]["video_ids_fn"])
+        caption_data(data_cfg["dataset_params"]["video_ids_fn"])
+        make_twitter_data(data_cfg["dataset_params"]["tweet_jsonlines_fn"])
+#         comment_data(data_cfg["dataset_params"]["video_ids_fn"])
         
     if 'analysis' in targets:
         with open('config/analysis-params.json') as fh:

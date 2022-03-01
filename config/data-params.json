@@ -14,6 +14,11 @@
     
     "missingness_params": {
         "tweets_ids_fn": "data/tweet_ids_dataset.tsv" 
-    }   
+    },
     
+    "dataset_params": {
+        "video_ids_fn": "data/video_ids.csv",
+        "tweet_jsonlines_fn": "data/tweets.jsonl",
+        "tweet_data_fp": "data/tweet_data.csv"
+    }
 }

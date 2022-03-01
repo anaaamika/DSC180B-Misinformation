@@ -3,25 +3,28 @@ sys.path.insert(0, '../../secrets')
 
 from googleapiclient.discovery import build
 from youtubekeys import api_key
+import csv
 
 def comment_data(video_ids_fn, outfolder="data"):
     data_fields = ["video_id", "comment_id", "comment_text", "parent_comment", "reply_count", "like_count", "user"]
-    with open(outfolder+"comment_data.csv", 'a') as f:
+    with open(outfolder+"/comment_data.csv", 'a') as f:
         writer = csv.writer(f)
         writer.writerow(data_fields)
-  
+    i = 1
     with open(video_ids_fn) as fn:
         for video_id in fn:
             try:
-                comment_data = fetch_comment(video_id)
-                with open(outfolder+"comment_data.csv", 'a') as f:
+                comment_data = fetch_comments(video_id)
+                with open(outfolder+"/comment_data.csv", 'a') as f:
                     writer = csv.writer(f)
                     writer.writerows(comment_data)
-            except:
+            except Exception as e:
+                print(e)
                 pass  
     return
 
 def fetch_comments(video_id):
+    print(video_id)
     
     comments = []
     
@@ -84,6 +87,3 @@ def fetch_comments(video_id):
             break
     return comments
 
-# if __name__ == '__main__':
-#     video_id = "OlWiPRWS-88"
-#     fetch_comments(video_id)
