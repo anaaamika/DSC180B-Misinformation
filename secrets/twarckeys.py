@@ -1,5 +1,5 @@
 # populate these values with keys and tokens from the Twitter Developer Portal
-consumer_key="qaRCQ1ZnnqEu9k5lw8WwJ9Nj7"
-consumer_secret="wf8RgCz8iUwtXz4yheb2AHVNd5zf8EgPUwoJ2ZRIBSLtFUkSaH"
-access_token="1445459097394896901-CnRQQyGPG99k3epWqmGr8eqEsztQ5p"
-access_token_secret="iCEonq6wijcympyOSbfvlKQYtGDiwlfzrykc0Sex1zsNi"
+consumer_key="CONSUMER_KEY"
+consumer_secret="CONSUMER_SECRET"
+access_token="ACCESS_TOKEN"
+access_token_secret="ACCESS_TOKEN_SECRET"
