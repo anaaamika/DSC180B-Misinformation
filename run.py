@@ -27,10 +27,10 @@ def main(targets):
 #         fetch_tweets(**data_cfg["hydrate_params"])
 #         missingness(**data_cfg["missingness_params"])
         
-#         youtube_data(data_cfg["dataset_params"]["video_ids_fn"])
-        caption_data(data_cfg["dataset_params"]["video_ids_fn"])
-        make_twitter_data(data_cfg["dataset_params"]["tweet_jsonlines_fn"])
-#         comment_data(data_cfg["dataset_params"]["video_ids_fn"])
+        youtube_data(data_cfg["dataset_params"]["video_ids_fn"])
+#         caption_data(data_cfg["dataset_params"]["video_ids_fn"])
+#         make_twitter_data(data_cfg["dataset_params"]["tweet_jsonlines_fn"])
+        comment_data(data_cfg["dataset_params"]["video_ids_fn"])
         
     if 'analysis' in targets:
         with open('config/analysis-params.json') as fh:

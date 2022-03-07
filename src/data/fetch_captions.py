@@ -16,11 +16,11 @@ def caption_data(video_ids_fn, outfolder="data/"):
         for video_id in fn:
             try:
                 video_data = fetch_transcript(video_id, formatter)
+                with open(outfolder+"caption_data.csv", 'a') as f:
+                    writer = csv.writer(f)
+                    writer.writerow(video_data)
             except:
-                video_data = [video_id, None, None, None, None]
-            with open(outfolder+"caption_data.csv", 'a') as f:
-                writer = csv.writer(f)
-                writer.writerow(video_data)  
+                pass
             
     return
 
