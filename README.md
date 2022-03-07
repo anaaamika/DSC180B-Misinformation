@@ -8,5 +8,6 @@ To build the project run the following commands:
 `python run.py data`
 
 ## To Do
-* Fix health kewywords datasets
-* Document cookies.txt file for age-restricted videos
+* Analyze video caption text
+* Analyze video and tweet metadata
+* Create misinformation detection model
