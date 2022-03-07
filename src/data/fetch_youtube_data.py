@@ -17,11 +17,12 @@ def youtube_data(video_ids_fn, outfolder="data/"):
     with open(video_ids_fn) as fn:
         for video_id in fn:
             try:
-                metadata = fetch_metadata(video_id)
+                metadata = fetch_metadata(video_id.strip())
                 with open(outfolder+"youtube_metadata.csv", 'a') as f:
                     writer = csv.writer(f)
                     writer.writerow(metadata)
             except Exception as e:
+                print(e)
                 pass  
     return
 
@@ -35,7 +36,6 @@ def fetch_metadata(video_id):
   
     # retrieve youtube video results
     video_response=youtube.videos().list(part='snippet,statistics,status,topicDetails', id=video_id).execute()
-    
     
     try:
         video_title = video_response['items'][0]['snippet']['title']
@@ -80,6 +80,4 @@ def fetch_metadata(video_id):
     
     data = [video_title, user, date_posted, like_count, comment_count, view_count, description, topic_details, video_tags, category]
     
-    
     return data
-    

@@ -10,11 +10,10 @@ def comment_data(video_ids_fn, outfolder="data"):
     with open(outfolder+"/comment_data.csv", 'a') as f:
         writer = csv.writer(f)
         writer.writerow(data_fields)
-    i = 1
     with open(video_ids_fn) as fn:
         for video_id in fn:
             try:
-                comment_data = fetch_comments(video_id)
+                comment_data = fetch_comments(video_id.strip())
                 with open(outfolder+"/comment_data.csv", 'a') as f:
                     writer = csv.writer(f)
                     writer.writerows(comment_data)
@@ -24,8 +23,6 @@ def comment_data(video_ids_fn, outfolder="data"):
     return
 
 def fetch_comments(video_id):
-    print(video_id)
-    
     comments = []
     
     # creating youtube resource object
