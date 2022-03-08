@@ -16,7 +16,7 @@ from scipy import stats
 t = Twarc2(consumer_key, consumer_secret, access_token, access_token_secret)
 
 
-def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, outfolder="data"):
+def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, health_keywords = "src/health_keywords/data/cleaned_health_terms_302.txt", outfolder="data"):
     tweets = df1.read_csv(tweets_ids_fn, sep='\t', dtype={'tweet_id': 'object'})
     tweet_cnt = 0
     total_urls = 0
@@ -38,7 +38,7 @@ def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, outfolder=
                 if total_youtube_urls < int(subset_size):
                     for tweet in batch['data']:
                         # add filters for healthcare terms and youtube links 
-                        if health_filter(tweet, "src/data/health_corpus.txt") and (
+                        if health_filter(tweet, health_keywords) and (
                                 total_youtube_urls < int(subset_size)):
                             tweet_cnt += 1
                             url_cnt, num_youtube_links = check_links(tweet, video_ids_fn)
