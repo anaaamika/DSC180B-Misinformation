@@ -35,15 +35,16 @@ def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, health_key
             subset = tweets.sample(frac=0.001)
             print("here 4")
             print(subset.columns)
+
             tweet_ids = subset[~subset['tweet_id'].isin(sampled)]['tweet_id']
             print("here 5")
             tweet_ids = tweet_ids.astype('object')
             new_samples = tweet_ids.compute()
             print("Done")
-            sampled = pd.concat([sampled, new_samples])
+            sampled.extend(new_samples)
+#             sampled = pd.concat([sampled, new_samples])
 #             sampled = sampled.compute().astype('object')
             print("here 3")
-
             hydrated_tweets = t.tweet_lookup(tweet_ids)
             print("here 6")
             for batch in hydrated_tweets:
