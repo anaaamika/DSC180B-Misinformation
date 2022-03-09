@@ -16,7 +16,7 @@ from scipy import stats
 t = Twarc2(consumer_key, consumer_secret, access_token, access_token_secret)
 
 
-def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, health_keywords = "src/health_keywords/data/cleaned_health_terms_302.txt", outfolder="data"):
+def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, health_keywords = "src/data/health_keywords/cleaned_health_terms_302.txt", outfolder="data"):
     print("fetching tweets")
     tweets = df1.read_csv(tweets_ids_fn, sep='\t', dtype={'tweet_id': 'object', 'date': 'object', 'time': 'object'})
     print("loaded df")
@@ -31,19 +31,18 @@ def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, health_key
         
         try:
             print("here 2")
-            tweets = tweets.astype('object')
-            subset = tweets.sample(frac=0.001)
+            subset = tweets.sample(frac=0.00001)
             print("here 4")
             print(subset.columns)
 
-            tweet_ids = subset[~subset['tweet_id'].isin(sampled)]['tweet_id']
-            print("here 5")
-            tweet_ids = tweet_ids.astype('object')
-            new_samples = tweet_ids.compute()
-            print("Done")
-            sampled.extend(new_samples)
-#             sampled = pd.concat([sampled, new_samples])
-#             sampled = sampled.compute().astype('object')
+            tweet_ids = subset['tweet_id']
+#             print("here 5")
+#             tweet_ids = tweet_ids.astype('str')
+#             new_samples = tweet_ids.compute()
+#             print("Done")
+#             sampled.extend(new_samples)
+# #             sampled = pd.concat([sampled, new_samples])
+# #             sampled = sampled.compute().astype('object')
             print("here 3")
             hydrated_tweets = t.tweet_lookup(tweet_ids)
             print("here 6")
@@ -137,7 +136,7 @@ def get_video_id(youtube_url):
 
 
 def health_filter(tweet, health_terms_fn):
-    keywords = pd.read_csv(health_terms_fn, header=None).dropna(axis=1)
+    keywords = pd.read_csv(health_terms_fn, header=None, sep="\t")
     keywords.columns = ['Term']
     keywords['Term'] = keywords['Term'].str.lower()
     try:
