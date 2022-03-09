@@ -12,7 +12,7 @@ def text_cleaning(video_caption):
         # normalize case
         video_caption = video_caption.lower()
         # remove punctuation
-        video_caption = re.sub(r"(@\[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|^rt|http.+?", "", video_caption)
+        video_caption = re.sub(r"(@\[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)|^rt|http.+?", " ", video_caption)
         # remove stopwords
         stop = stopwords.words('english')
         video_caption = " ".join([word for word in video_caption.split() if word not in (stop)])

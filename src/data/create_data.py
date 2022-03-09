@@ -17,51 +17,64 @@ t = Twarc2(consumer_key, consumer_secret, access_token, access_token_secret)
 
 
 def fetch_tweets(subset_size, tweets_ids_fn, tweets_fn, video_ids_fn, health_keywords = "src/health_keywords/data/cleaned_health_terms_302.txt", outfolder="data"):
-    tweets = df1.read_csv(tweets_ids_fn, sep='\t', dtype={'tweet_id': 'object'})
+    print("fetching tweets")
+    tweets = df1.read_csv(tweets_ids_fn, sep='\t', dtype={'tweet_id': 'object', 'date': 'object', 'time': 'object'})
+    print("loaded df")
     tweet_cnt = 0
     total_urls = 0
     total_youtube_urls = 0
     youtube_tweets = 0
 
     sampled = []
-    try:
-        while total_youtube_urls < int(subset_size):
 
-            try:
-                subset = tweets.sample(frac=0.001)
-                tweet_ids = subset[subset['tweet_id'] not in sampled]['tweet_id']
+    while total_youtube_urls < int(subset_size):
+        
+        try:
+            print("here 2")
+            tweets = tweets.astype('object')
+            subset = tweets.sample(frac=0.001)
+            print("here 4")
+            print(subset.columns)
+            tweet_ids = subset[~subset['tweet_id'].isin(sampled)]['tweet_id']
+            print("here 5")
+            tweet_ids = tweet_ids.astype('object')
+            new_samples = tweet_ids.compute()
+            print("Done")
+            sampled = pd.concat([sampled, new_samples])
+#             sampled = sampled.compute().astype('object')
+            print("here 3")
 
-                sampled = sampled.extend(tweet_ids)
+            hydrated_tweets = t.tweet_lookup(tweet_ids)
+            print("here 6")
+            for batch in hydrated_tweets:
+                if total_youtube_urls < int(subset_size):
+                    for tweet in batch['data']:
+                        print("here")
+                        # add filters for healthcare terms and youtube links 
+                        if health_filter(tweet, health_keywords) and (
+                                total_youtube_urls < int(subset_size)):
+                            tweet_cnt += 1
+                            url_cnt, num_youtube_links = check_links(tweet, video_ids_fn)
+                            total_urls += url_cnt
+                            total_youtube_urls += num_youtube_links
+                            youtube_tweets += 1
 
-                hydrated_tweets = t.tweet_lookup(tweet_ids)
+                            if num_youtube_links > 0:
+                                with jsonlines.open(tweets_fn, 'a') as writer:
+                                    writer.write(tweet)
+                        else:
+                            break
+                else:
+                    break
+        except Exception as e:
+            print(e)
+            
 
-                for batch in hydrated_tweets:
-                    if total_youtube_urls < int(subset_size):
-                        for tweet in batch['data']:
-                            # add filters for healthcare terms and youtube links 
-                            if health_filter(tweet, health_keywords) and (
-                                    total_youtube_urls < int(subset_size)):
-                                tweet_cnt += 1
-                                url_cnt, num_youtube_links = check_links(tweet, video_ids_fn)
-                                total_urls += url_cnt
-                                total_youtube_urls += num_youtube_links
-                                youtube_tweets += 1
-
-                                if num_youtube_links > 0:
-                                    with jsonlines.open(tweets_fn, 'a') as writer:
-                                        writer.write(tweet)
-                            else:
-                                break
-                    else:
-                        break
-            except:
-                pass
-    except:
-        with open(outfolder + "/outputs.txt", "a") as text_file:
-            text_file.write('The number of public health-related tweets with urls was'+ str(tweet_cnt)+ '.\n')
-            text_file.write('The number of urls was' + str(total_urls) + '.\n')
-            text_file.write('The number of YouTube urls was' + str(total_youtube_urls) + '.\n')
-            text_file.write('The number of tweets with YouTube urls was' + str(youtube_tweets) + '.\n')
+    with open(outfolder + "/outputs.txt", "a") as text_file:
+        text_file.write('The number of public health-related tweets with urls was'+ str(tweet_cnt)+ '.\n')
+        text_file.write('The number of urls was' + str(total_urls) + '.\n')
+        text_file.write('The number of YouTube urls was' + str(total_youtube_urls) + '.\n')
+        text_file.write('The number of tweets with YouTube urls was' + str(youtube_tweets) + '.\n')
 
     return
 
@@ -71,6 +84,7 @@ def check_links(tweet, video_ids_fn):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 Edg/90.0.818.46'}
     youtube_links = 0
     num_urls = 0
+    print("checking links")
     try:
         if 'urls' in tweet['entities'].keys():
             url_list = [link['expanded_url'] for link in tweet['entities']['urls']]

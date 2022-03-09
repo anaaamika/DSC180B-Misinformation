@@ -23,13 +23,16 @@ def main(targets):
         with open('config/data-params.json') as fh:
             data_cfg = json.load(fh)
 
-#         download_tweet_ids(**data_cfg["download_params"])
+        download_tweet_ids(**data_cfg["download_params"])
         fetch_tweets(**data_cfg["hydrate_params"])
         missingness(**data_cfg["missingness_params"])
         
         youtube_data(data_cfg["dataset_params"]["video_ids_fn"])
+        print("collected YT metadata")
         caption_data(data_cfg["dataset_params"]["video_ids_fn"])
+        print("fetched subtitles")
         make_twitter_data(data_cfg["dataset_params"]["tweet_jsonlines_fn"])
+        print("made twitter metadata")
 #         comment_data(data_cfg["dataset_params"]["video_ids_fn"])
         
     if 'analysis' in targets:

@@ -10,6 +10,7 @@ import shutil
 import os
 
 def download_tweet_ids(start_date, end_date, tweets_ids_fn):
+    print("starting tweet id download")
     if os.path.exists(tweets_ids_fn) and os.path.getsize(tweets_ids_fn) > 0:
         return
     if type(start_date) == str:
