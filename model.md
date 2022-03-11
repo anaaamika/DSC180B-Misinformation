@@ -10,13 +10,6 @@ title: Misinformation Model
 <p>After vectorization, we build the final model. We tried multiple classifiers including Logistic Regression, Naive Bayes, Decision Tree and finally found that sklearn’s Passive Aggressive Classifier had the best performance based on accuracy on the training dataset which was then used to detect misinformation from the YouTube videos. This was the expected result as the Passive Aggressive Classifier is suited for online learning that deals with large sets of data and their loss function is passive when dealing with an outcome that has been correctly classified, and aggressive when a miscalculation takes place, thus the model is constantly self-updating and adjusting. Running this model on our dataset of YouTube captions resulted in 23% of the video captions being classified as misinformation. </p> 
 
 ### Model Evaluation 
-| **Model**| **Accuracy Score** |
-| ----------- | ----------- |
-| Logistic Regression| 0.704|
-| Naive Bayes| 0.634|
-| Decision Tree| 0.787|
-| Passive Agressive Classifier| 0.790|
-
 <table>
 <thead>
 <tr>
