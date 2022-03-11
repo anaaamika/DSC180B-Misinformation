@@ -4,8 +4,8 @@ title: References
 | [Introduction](https://anaaamika.github.io/DSC180B-Misinformation/)| [Data](https://anaaamika.github.io/DSC180B-Misinformation/data) |[Misinformation Model](https://anaaamika.github.io/DSC180B-Misinformation/model)| [Topic Modeling](https://anaaamika.github.io/DSC180B-Misinformation/topic-model) | [Sentiment Analysis](https://anaaamika.github.io/DSC180B-Misinformation/sentiment-analysis) | [References](https://anaaamika.github.io/DSC180B-Misinformation/references) |
 
 # References
-1. Barthel M, Mitchell A, Holcomb J. Many Americans Believe Fake News Is Sowing Confusion; 2016. Available from: [http://www.journalism.org/2016/12/15/many-americans-believe-fake-news-is-sowing-confusion/]. 
-2. N. Mohan, "Perspective: Tackling Misinformation on YouTube," blog.youtube.com, Aug. 25, 2021. [Online]. Available: [https://blog.youtube/inside-youtube/tackling-misinfo/. [Accessed: Dec. 4, 2021]]. 
+1. Barthel M, Mitchell A, Holcomb J. Many Americans Believe Fake News Is Sowing Confusion; 2016. Available from: http://www.journalism.org/2016/12/15/many-americans-believe-fake-news-is-sowing-confusion/. 
+2. N. Mohan, "Perspective: Tackling Misinformation on YouTube," blog.youtube.com, Aug. 25, 2021. [Online]. Available: https://blog.youtube/inside-youtube/tackling-misinfo/. [Accessed: Dec. 4, 2021]. 
 3. Y. Roth, N. Pickles, "Updating our approach to misleading information," blog.twitter.com, May 11, 2020. [Online]. Available: https://blog.twitter.com/en_us/topics/product/2020/updating-our-approach-to-misleading-information. [Accessed: Dec. 4, 2021]. 
 4. D. Allington, B. Duffy, S. Wessely, N. Dhavan, J. Rubin, “Health-protective behaviour, social media usage and conspiracy belief during the COVID-19 public health emergency,” Psychological Medicine, vol. 51, no. 10, pp. 1763–1769,  2021.
 5. A. Knuutila, A. Herasimenka, H. Au, J. Bright, R. Nielsen, P. Howard, “COVID-Related Misinformation on YouTube: The Spread of Misinformation Videos on Social Media and the Effectiveness of Platform Policies,” COMPROP Data Memo, vol. 6, pp. 1-7, 2020. 
