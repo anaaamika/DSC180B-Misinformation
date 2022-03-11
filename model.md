@@ -11,6 +11,7 @@ title: Misinformation Model
 
 ### Model Evaluation 
 | Model| Accuracy Score |
+
 | ----------- | ----------- |
 
 | Logistic Regression| 0.704|
