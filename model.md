@@ -13,7 +13,6 @@ title: Misinformation Model
 | Model| Accuracy Score |
 
 | ----------- | ----------- |
-
 | Logistic Regression| 0.704|
 | Naive Bayes| 0.634|
 | Decision Tree| 0.787|
