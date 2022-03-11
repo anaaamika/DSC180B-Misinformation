@@ -2,7 +2,4 @@
 title: Misinformation Model
 ---
 
-hello
-=====
-
-**You are here!**
+| [Introduction](https://anaaamika.github.io/DSC180B-Misinformation/)      | [Misinformation Model](https://anaaamika.github.io/DSC180B-Misinformation/model) | |
