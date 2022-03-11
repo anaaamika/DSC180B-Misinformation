@@ -1,0 +1,4 @@
+{
+    "models_list": "LogisticRegression(), MultinomialNB(), DecisionTreeClassifier(), PassiveAggressiveClassifier(max_iter=50)"
+ 
+}

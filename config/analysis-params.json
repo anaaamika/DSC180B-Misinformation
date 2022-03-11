@@ -1,0 +1,10 @@
+{
+    "eda_params": {
+        "cleaned_captions_fn": "data/caption_data.csv",
+        "outfolder": "data/"
+    },
+    
+    "topic_model_params": {
+        "cleaned_captions_fn": "data/cleaned_captions.csv",
+    }
+}

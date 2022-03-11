@@ -6,6 +6,7 @@ import os
 
 sys.path.insert(0, 'src/data')
 sys.path.insert(0, 'src/analysis')
+sys.path.insert(0, 'src/model')
 sys.path.insert(0, 'test')
 
 from create_data import fetch_tweets, missingness
@@ -14,9 +15,10 @@ from fetch_captions import caption_data
 from fetch_youtube_data import youtube_data
 from twitter_data import make_twitter_data
 from youtube_comments import comment_data
-# import eda
+import eda
+import topic_modeling
 import generate_data
-# import kcore
+import misinformation_model
 
 def main(targets):
     if 'data' in targets:
@@ -28,25 +30,23 @@ def main(targets):
         missingness(**data_cfg["missingness_params"])
         
         youtube_data(data_cfg["dataset_params"]["video_ids_fn"])
-        print("collected YT metadata")
         caption_data(data_cfg["dataset_params"]["video_ids_fn"])
-        print("fetched subtitles")
         make_twitter_data(data_cfg["dataset_params"]["tweet_jsonlines_fn"])
-        print("made twitter metadata")
+        
 #         comment_data(data_cfg["dataset_params"]["video_ids_fn"])
         
     if 'analysis' in targets:
         with open('config/analysis-params.json') as fh:
             analysis_cfg = json.load(fh)
             
-#         eda.url_proportion(**analysis_cfg["url_prop_params"])
-#         eda.urls(**analysis_cfg["urls_params"])
-#         eda.misinformation_proportion(**analysis_cfg["misinformation_url_prop_params"])
-#         kcore.rt_ids(**analysis_cfg["kcores_rt_params"])
-#         kcore.create_kcore(**analysis_cfg["kcores_graph_params"])
+        eda.caption_analysis(**analysis_cfg["eda_params"])
+        eda.topic_model(**analysis_cfg["topic_model_params"])
+
 
     if 'model' in targets:
-        print("Coming soon!")
+        with open('config/model-params.json') as fh:
+            model_cfg = json.load(fh)
+        misinformation_model.model_selection(**model_cfg)
         
     if 'test' in targets:
         with open('config/test-params.json') as fh:

@@ -7,7 +7,7 @@ import time
 import requests
 from newspaper import Article
 
-def fetch_news_data(real_news_fn="politifact_real.csv", fake_news_fn="politifact_fake.csv", outfile="data/news_data.csv"):
+def fetch_news_data(real_news_fn="src/data/politifact_real.csv", fake_news_fn="src/data/politifact_fake.csv", outfile="data/news_data.csv"):
     fake_df = pd.read_csv(fake_news_fn)
     real_df = pd.read_csv(real_news_fn)
     
@@ -108,6 +108,3 @@ def crawl_news_article(url):
             news_article = crawl_link_article(archieve_url)
 
     return news_article
-
-if __name__ == '__main__':
-    fetch_news_data()

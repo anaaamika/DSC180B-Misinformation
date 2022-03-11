@@ -21,8 +21,8 @@ def text_cleaning(video_caption):
         video_caption = " ".join([wn.lemmatize(word) for word in video_caption.split()])
     return video_caption
  
-def tfidf(video_df):
-    words = pd.Series(video_df.text.dropna().str.split().sum())
+def tfidf(video_df, outfolder="data/"):
+    words = pd.Series(video_df.text.str.split().sum())
     tfidf = pd.DataFrame([], index=video_df.index)  # dataframe of documents
     tf_denom = (video_df.text.str.count(' ') + 1)
     for w in words.value_counts().iloc[0:500].index:
@@ -32,5 +32,13 @@ def tfidf(video_df):
         idf = np.log(len(df) / video_df.text.str.contains(re_pat).sum())
         tfidf[w] =  tf * idf
         
-    tfidf.to_csv("data/tfidf.csv")
+    tfidf.to_csv("results/tfidf.csv")
+    return
+
+def caption_analysis(captions_fn, outfolder="data/"):
+    captions_df = pd.read_csv(captions_fn).dropna()
+    captions_df["text"] = captions_df["text"].apply(text_cleaning)
+    captions_df.to_csv(outfolder+"cleaned_captions.csv")
+    
+    tfidf(captions_df)
     return
