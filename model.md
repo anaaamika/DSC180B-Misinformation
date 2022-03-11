@@ -17,3 +17,30 @@ title: Misinformation Model
 | Decision Tree| 0.787|
 | Passive Agressive Classifier| 0.790|
 
+<table>
+<thead>
+<tr>
+<th><strong>Model</strong></th>
+<th><strong>Accuracy Score</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logistic Regression</td>
+<td>0.704</td>
+</tr>
+<tr>
+<td>Naive Bayes</td>
+<td>0.634</td>
+</tr>
+<tr>
+<td>Decision Tree</td>
+<td>0.787</td>
+</tr>
+<tr>
+<td>Passive Agressive Classifier</td>
+<td>0.790</td>
+</tr>
+</tbody>
+</table>
+
